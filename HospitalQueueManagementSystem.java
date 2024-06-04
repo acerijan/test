@@ -159,7 +159,7 @@ public class HospitalQueueManagementSystem {
     private JButton staffButton,callButton,viewListButton;
     private JLabel callLabel;
     private JButton patientButton;
-    private JButton admissionButton;
+    private JButton admissionButton,admit;
     private JButton searchButton;
     private JButton backButton;
     private JTextField id;
@@ -170,8 +170,8 @@ public class HospitalQueueManagementSystem {
      public HospitalQueueManagementSystem() {
         q=new QueueLogic();
         f=new FileHandler();
-        //idTracker();
-        //f.reader(q);
+        idTracker();
+        f.reader(q);
         frame = new JFrame("Hospital Queue Management System");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -179,8 +179,8 @@ public class HospitalQueueManagementSystem {
         {
         public void windowClosing(WindowEvent e)
         {
-            //f.writer(q.start);
-            //idSetter();
+            f.writer(q.start);
+            idSetter();
             System.exit(0);
         }
         });
@@ -314,7 +314,7 @@ public class HospitalQueueManagementSystem {
                 }
             });
             frame.revalidate();
-        frame.repaint();
+            frame.repaint();
      }
      public void setSearchInterface(){
         panel.removeAll();
@@ -344,10 +344,12 @@ public class HospitalQueueManagementSystem {
         frame.revalidate();
         frame.repaint();
      }
+
      public void setAdmissionInterface(){
         panel.removeAll();
         name=new JTextField("enter name",20);
         age=new JTextField("enter age",10);
+        admit=new JButton("admission");
         r1=new JRadioButton("critical");
         r2=new JRadioButton("not critical");
         grp=new ButtonGroup();
@@ -357,10 +359,10 @@ public class HospitalQueueManagementSystem {
         panel.add(age);
         panel.add(r1);
         panel.add(r2);
-        panel.add(admissionButton);
+        panel.add(admit);
         panel.add(callLabel);
         panel.add(backButton);
-        admissionButton.addActionListener(new ActionListener(){
+        admit.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e)
             {  
